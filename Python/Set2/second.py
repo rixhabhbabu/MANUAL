@@ -144,4 +144,3 @@ if __name__ == "__main__":
     alice.drop_course(math101)
     print("\n--- After Dropping a Course ---")
     math101.display_info()
-    #Hehe My name is Rishabh babu and i Make chnge in this file from my local machine and By git bash
