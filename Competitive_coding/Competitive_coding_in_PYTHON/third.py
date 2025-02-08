@@ -30,3 +30,5 @@ if __name__ == "__main__":
 
     print("Next Greater Elements:")
     print(" ".join(map(str, result)))
+    
+    
