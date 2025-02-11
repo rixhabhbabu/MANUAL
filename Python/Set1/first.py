@@ -2,7 +2,7 @@ def Celcius_to_Fehranite(Celcius):
     return Celcius * (9/5) + 32
 def Fehranite_to_Celcius(fehranite):
     return (fehranite - 32) * (5/9)
-
+# I also addded the try and except block to handle the error if user enter the wrong value
 choice = (input("""Enter Your Choice:
 1. Celcius -> Fehranite
 2. Fehranite -> Celcius
