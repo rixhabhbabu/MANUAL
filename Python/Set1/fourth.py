@@ -1,7 +1,7 @@
 def avg(listt):
-    return sum(listt)/len(listt);
+    return sum(listt)/len(listt)
 
-length = float(input("Enter the Length: "))
+length = int(input("Enter the Length: "))
 l1 = []
 for i in range(1,length+1):
     l1.append(int(input("Enter the Number: ")))
