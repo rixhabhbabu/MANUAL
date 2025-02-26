@@ -1,44 +1,45 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
+# TreeNode class representing a node in the Binary Search Tree
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
-def pre_order_traversal(root):
-    if root:
-        print(root.data, end=" ")  # Visit root first
-        pre_order_traversal(root.left)  # Then visit left subtree
-        pre_order_traversal(root.right)  # Then visit right subtree
+# Class to validate a BST
+class ValidateBST:
+    def isValidBST(self, root):
+        # Helper function to recursively validate the BST
+        def isValidBSTHelper(node, min_val, max_val):
+            # Base case: an empty node is a valid BST
+            if node is None:
+                return True
 
-def in_order_traversal(root):
-    if root:
-        in_order_traversal(root.left)  # Visit left subtree first
-        print(root.data, end=" ")  # Then visit root
-        in_order_traversal(root.right)  # Then visit right subtree
+            # Check if the current node's value is within the valid range
+            if node.val <= min_val or node.val >= max_val:
+                return False
 
-def post_order_traversal(root):
-    if root:
-        post_order_traversal(root.left)  # Visit left subtree first
-        post_order_traversal(root.right)  # Then visit right subtree
-        print(root.data, end=" ")  # Then visit root
+            # Recursively check the left and right subtrees
+            return (isValidBSTHelper(node.left, min_val, node.val) and
+                    isValidBSTHelper(node.right, node.val, max_val))
 
+        # Initial call to the helper function with the root and the full range
+        return isValidBSTHelper(root, float('-inf'), float('inf'))
+
+# Main method to test the BST validation
 if __name__ == "__main__":
-    # Create a sample binary tree
-    root = Node(1)
-    root.left = Node(2)
-    root.right = Node(3)
-    root.left.left = Node(4)
-    root.left.right = Node(5)
-    
-    # Perform tree traversals
-    print("Pre-order traversal:", end=" ")
-    pre_order_traversal(root)
-    print()
-    
-    print("In-order traversal:", end=" ")
-    in_order_traversal(root)
-    print()
-    
-    print("Post-order traversal:", end=" ")
-    post_order_traversal(root)
-    print()
+    # Example usage:
+    root = TreeNode(2)
+    root.left = TreeNode(1)
+    root.right = TreeNode(3)
+
+    validator = ValidateBST()
+    print(validator.isValidBST(root))  # Output: True
+
+    # Example of an invalid BST
+    invalidRoot = TreeNode(5)
+    invalidRoot.left = TreeNode(1)
+    invalidRoot.right = TreeNode(4)
+    invalidRoot.right.left = TreeNode(3)
+    invalidRoot.right.right = TreeNode(6)
+
+    print(validator.isValidBST(invalidRoot))  # Output: False

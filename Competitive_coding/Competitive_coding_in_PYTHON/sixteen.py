@@ -1,42 +1,37 @@
-from collections import deque
-
-# Definition for a binary tree node
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
+class Node:
+    def __init__(self, data):
+        self.data = data
         self.left = None
         self.right = None
 
-class LevelOrderTraversal:
-    def level_order(self, root):
-        if not root:
-            return  # If the tree is empty, return
-        
-        queue = deque([root])  # Create a queue and enqueue the root node
-        
-        while queue:
-            current_node = queue.popleft()  # Dequeue the front node
-            print(current_node.val, end=" ")  # Process the node (print its value)
-            
-            # Enqueue left child
-            if current_node.left:
-                queue.append(current_node.left)
-            
-            # Enqueue right child
-            if current_node.right:
-                queue.append(current_node.right)
+def are_mirror(root1, root2):
+    # Base case: Both trees are empty
+    if root1 is None and root2 is None:
+        return True
+    # One tree is empty and the other is not
+    if root1 is None or root2 is None:
+        return False
+    # Check if root data matches and subtrees are mirrors
+    return (root1.data == root2.data and
+            are_mirror(root1.left, root2.right) and
+            are_mirror(root1.right, root2.left))
 
-# Main method to test the level order traversal
 if __name__ == "__main__":
-    # Create a sample binary tree
-    root = TreeNode(1)
-    root.left = TreeNode(2)
-    root.right = TreeNode(3)
-    root.left.left = TreeNode(4)
-    root.left.right = TreeNode(5)
-    root.right.left = TreeNode(6)
-    root.right.right = TreeNode(7)
+    # Create mirrored trees
+    root1 = Node(1)
+    root1.left = Node(2)
+    root1.right = Node(3)
+    root1.left.left = Node(4)
+    root1.left.right = Node(5)
 
-    traversal = LevelOrderTraversal()
-    print("Level Order Traversal of the binary tree:")
-    traversal.level_order(root)  # Perform level order traversal
+    root2 = Node(1)
+    root2.left = Node(3)
+    root2.right = Node(2)
+    root2.right.left = Node(5)
+    root2.right.right = Node(4)
+
+    # Check if the trees are mirror images
+    if are_mirror(root1, root2):
+        print("Given trees are mirrored trees.")
+    else:
+        print("Given trees are not mirrored trees.")

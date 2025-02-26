@@ -1,37 +1,41 @@
-class Node:
+# BST class representing a node in the Binary Search Tree
+class BST:
     def __init__(self, data):
         self.data = data
         self.left = None
         self.right = None
 
-def are_mirror(root1, root2):
-    # Base case: Both trees are empty
-    if root1 is None and root2 is None:
-        return True
-    # One tree is empty and the other is not
-    if root1 is None or root2 is None:
-        return False
-    # Check if root data matches and subtrees are mirrors
-    return (root1.data == root2.data and
-            are_mirror(root1.left, root2.right) and
-            are_mirror(root1.right, root2.left))
-
-if __name__ == "__main__":
-    # Create mirrored trees
-    root1 = Node(1)
-    root1.left = Node(2)
-    root1.right = Node(3)
-    root1.left.left = Node(4)
-    root1.left.right = Node(5)
-
-    root2 = Node(1)
-    root2.left = Node(3)
-    root2.right = Node(2)
-    root2.right.left = Node(5)
-    root2.right.right = Node(4)
-
-    # Check if the trees are mirror images
-    if are_mirror(root1, root2):
-        print("Given trees are mirrored trees.")
+# Function to insert a new node into the BST
+def insert(root, val):
+    if root is None:
+        return BST(val)
+    
+    if root.data < val:
+        root.right = insert(root.right, val)
     else:
-        print("Given trees are not mirrored trees.")
+        root.left = insert(root.left, val)
+    
+    return root
+
+# Function to perform an inorder traversal of the BST
+def inorder(root):
+    if root is None:
+        return
+    
+    inorder(root.left)
+    print(root.data, end=" ")
+    inorder(root.right)
+
+# Main method to create a sample BST and perform inorder traversal
+if __name__ == "__main__":
+    root = None
+    root = insert(root, 80)
+    root = insert(root, 60)
+    root = insert(root, 90)
+    root = insert(root, 10)
+    root = insert(root, 70)
+    root = insert(root, 85)
+    root = insert(root, 110)
+
+    print("In-order traversal of the BST:")
+    inorder(root)
